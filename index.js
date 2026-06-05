@@ -1,15 +1,21 @@
-const images = document.querySelectorAll(".image");
+const carouselContainer = document.querySelector(".carousel-container");
 
-let currentIndex = 0;
+function handleKeyboardScroll(event) {
+  const scrollDistance = carouselContainer.clientWidth;
 
-document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") {
-    currentIndex = (currentIndex + 1) % images.length;
-    showImage(currentIndex);
+    carouselContainer.scrollBy({
+      left: scrollDistance,
+      behavior: "smooth"
+    });
   }
 
   if (event.key === "ArrowLeft") {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    showImage(currentIndex);
+    carouselContainer.scrollBy({
+      left: -scrollDistance,
+      behavior: "smooth"
+    });
   }
-});
+}
+
+document.addEventListener("keydown", handleKeyboardScroll);
